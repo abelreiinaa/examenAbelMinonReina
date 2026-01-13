@@ -23,10 +23,31 @@
         .input-container input[type="text"] {
             width: 150px;
         }
-        /* Un pequeño margen para separar los botones */
+        
+        /* Estilos generales para los botones */
         input[type="button"] {
             margin-right: 5px;
+            padding: 8px 15px; /* Un poco de espacio interno */
+            border: none;      /* Quitar el borde por defecto */
+            cursor: pointer;   /* Cambiar el cursor a manita */
+            font-weight: bold;
+            color: white;      /* Texto blanco */
         }
+
+        /* Estilo específico para Suma (Verde) */
+        .btn-suma {
+            background-color: green;
+        }
+        
+        /* Estilo específico para Resta (Rojo) */
+        .btn-resta {
+            background-color: red;
+        }
+
+        /* Efecto al pasar el mouse por encima (opcional, para que se vea mejor) */
+        .btn-suma:hover { background-color: darkgreen; }
+        .btn-resta:hover { background-color: darkred; }
+
     </style>
 </head>
 <body>
@@ -44,8 +65,10 @@
                 <label for="num2">Segundo número:</label>
                 <input type="text" id="num2">
             </div>
-            <input type="button" value="Calcular suma"  onclick="calcularSuma()">
-            <input type="button" value="Calcular resta"  onclick="calcularResta()">
+            
+            <input type="button" value="Calcular suma" onclick="calcularSuma()" class="btn-suma">
+            
+            <input type="button" value="Calcular resta" onclick="calcularResta()" class="btn-resta">
         </form>
 
         <div id="resultado" style="margin-top: 20px; font-weight: bold;"></div>
@@ -60,23 +83,30 @@ function calcularSuma() {
     if (!isNaN(num1) && !isNaN(num2)) {
         var suma = num1 + num2;
         document.getElementById("resultado").innerHTML = "El resultado de la suma es: " + suma;
+        // Opcional: cambiar el color del texto del resultado a verde
+        document.getElementById("resultado").style.color = "green"; 
     } else {
-        document.getElementById("resultado").innerHTML = "Por favor, ingrese dos números válidos.";
+        mostrarError();
     }
 }
 
-// Nueva función para la resta
 function calcularResta() {
     var num1 = parseFloat(document.getElementById("num1").value);
     var num2 = parseFloat(document.getElementById("num2").value);
 
     if (!isNaN(num1) && !isNaN(num2)) {
-        // Lógica de resta
         var resta = num1 - num2;
         document.getElementById("resultado").innerHTML = "El resultado de la resta es: " + resta;
+        // Opcional: cambiar el color del texto del resultado a rojo
+        document.getElementById("resultado").style.color = "red";
     } else {
-        document.getElementById("resultado").innerHTML = "Por favor, ingrese dos números válidos.";
+        mostrarError();
     }
+}
+
+function mostrarError() {
+    document.getElementById("resultado").innerHTML = "Por favor, ingrese dos números válidos.";
+    document.getElementById("resultado").style.color = "black";
 }
 </script>
 
