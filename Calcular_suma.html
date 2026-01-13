@@ -24,7 +24,7 @@
             width: 150px;
         }
         
-        /* Estilos generales para los botones */
+        /* Estilos generales */
         input[type="button"] {
             margin-right: 5px;
             padding: 8px 15px;
@@ -33,6 +33,7 @@
             font-weight: bold;
             color: white;
         }
+
 
         /* Colores de los botones */
         .btn-suma { background-color: green; }
@@ -43,6 +44,17 @@
         .btn-suma:hover { background-color: darkgreen; }
         .btn-resta:hover { background-color: darkred; }
         .btn-multi:hover { background-color: darkblue; }
+
+        /* Colores */
+        .btn-suma { background-color: green; }
+        .btn-resta { background-color: red; }
+        .btn-div { background-color: orange; } /* Color para el cociente */
+
+        /* Hover */
+        .btn-suma:hover { background-color: darkgreen; }
+        .btn-resta:hover { background-color: darkred; }
+        .btn-div:hover { background-color: darkorange; }
+
 
     </style>
 </head>
@@ -65,6 +77,10 @@
             <input type="button" value="Sumar" onclick="calcularSuma()" class="btn-suma">
             <input type="button" value="Restar" onclick="calcularResta()" class="btn-resta">
             <input type="button" value="Multiplicar" onclick="calcularMultiplicacion()" class="btn-multi">
+            <input type="button" value="Calcular suma" onclick="calcularSuma()" class="btn-suma">
+            <input type="button" value="Calcular resta" onclick="calcularResta()" class="btn-resta">
+            
+            <input type="button" value="Calcular cociente" onclick="calcularCociente()" class="btn-div">
         </form>
 
         <div id="resultado" style="margin-top: 20px; font-weight: bold;"></div>
@@ -102,6 +118,8 @@ function calcularResta() {
 
 // Nueva Función Multiplicación
 function calcularMultiplicacion() {
+// NUEVA FUNCIÓN: COCIENTE
+function calcularCociente() {
     var num1 = parseFloat(document.getElementById("num1").value);
     var num2 = parseFloat(document.getElementById("num2").value);
 
@@ -109,6 +127,16 @@ function calcularMultiplicacion() {
         var multi = num1 * num2;
         document.getElementById("resultado").innerHTML = "El resultado de la multiplicación es: " + multi;
         document.getElementById("resultado").style.color = "blue"; // Texto azul
+        if (num2 === 0) {
+            // Evitar dividir por cero
+            document.getElementById("resultado").innerHTML = "Error: No se puede dividir por cero";
+            document.getElementById("resultado").style.color = "black";
+        } else {
+            var cociente = num1 / num2;
+            // .toFixed(2) limita a 2 decimales para que se vea mejor
+            document.getElementById("resultado").innerHTML = "El cociente es: " + cociente.toFixed(2);
+            document.getElementById("resultado").style.color = "orange";
+        }
     } else {
         mostrarError();
     }
