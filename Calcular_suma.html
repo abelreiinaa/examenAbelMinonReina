@@ -27,26 +27,22 @@
         /* Estilos generales para los botones */
         input[type="button"] {
             margin-right: 5px;
-            padding: 8px 15px; /* Un poco de espacio interno */
-            border: none;      /* Quitar el borde por defecto */
-            cursor: pointer;   /* Cambiar el cursor a manita */
+            padding: 8px 15px;
+            border: none;
+            cursor: pointer;
             font-weight: bold;
-            color: white;      /* Texto blanco */
+            color: white;
         }
 
-        /* Estilo específico para Suma (Verde) */
-        .btn-suma {
-            background-color: green;
-        }
-        
-        /* Estilo específico para Resta (Rojo) */
-        .btn-resta {
-            background-color: red;
-        }
+        /* Colores de los botones */
+        .btn-suma { background-color: green; }
+        .btn-resta { background-color: red; }
+        .btn-multi { background-color: blue; } /* Nuevo estilo para Multiplicación */
 
-        /* Efecto al pasar el mouse por encima (opcional, para que se vea mejor) */
+        /* Efectos hover */
         .btn-suma:hover { background-color: darkgreen; }
         .btn-resta:hover { background-color: darkred; }
+        .btn-multi:hover { background-color: darkblue; }
 
     </style>
 </head>
@@ -66,9 +62,9 @@
                 <input type="text" id="num2">
             </div>
             
-            <input type="button" value="Calcular suma" onclick="calcularSuma()" class="btn-suma">
-            
-            <input type="button" value="Calcular resta" onclick="calcularResta()" class="btn-resta">
+            <input type="button" value="Sumar" onclick="calcularSuma()" class="btn-suma">
+            <input type="button" value="Restar" onclick="calcularResta()" class="btn-resta">
+            <input type="button" value="Multiplicar" onclick="calcularMultiplicacion()" class="btn-multi">
         </form>
 
         <div id="resultado" style="margin-top: 20px; font-weight: bold;"></div>
@@ -76,6 +72,7 @@
 </div>
 
 <script>
+// Función Suma
 function calcularSuma() {
     var num1 = parseFloat(document.getElementById("num1").value);
     var num2 = parseFloat(document.getElementById("num2").value);
@@ -83,13 +80,13 @@ function calcularSuma() {
     if (!isNaN(num1) && !isNaN(num2)) {
         var suma = num1 + num2;
         document.getElementById("resultado").innerHTML = "El resultado de la suma es: " + suma;
-        // Opcional: cambiar el color del texto del resultado a verde
         document.getElementById("resultado").style.color = "green"; 
     } else {
         mostrarError();
     }
 }
 
+// Función Resta
 function calcularResta() {
     var num1 = parseFloat(document.getElementById("num1").value);
     var num2 = parseFloat(document.getElementById("num2").value);
@@ -97,8 +94,21 @@ function calcularResta() {
     if (!isNaN(num1) && !isNaN(num2)) {
         var resta = num1 - num2;
         document.getElementById("resultado").innerHTML = "El resultado de la resta es: " + resta;
-        // Opcional: cambiar el color del texto del resultado a rojo
         document.getElementById("resultado").style.color = "red";
+    } else {
+        mostrarError();
+    }
+}
+
+// Nueva Función Multiplicación
+function calcularMultiplicacion() {
+    var num1 = parseFloat(document.getElementById("num1").value);
+    var num2 = parseFloat(document.getElementById("num2").value);
+
+    if (!isNaN(num1) && !isNaN(num2)) {
+        var multi = num1 * num2;
+        document.getElementById("resultado").innerHTML = "El resultado de la multiplicación es: " + multi;
+        document.getElementById("resultado").style.color = "blue"; // Texto azul
     } else {
         mostrarError();
     }
